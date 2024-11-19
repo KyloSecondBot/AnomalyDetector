@@ -1,0 +1,28 @@
+# Node.js-related ignores
+node_modules/
+dist/
+.env
+
+# Logs
+*.log
+logs/
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db
+
+# IDE-specific ignores
+.vscode/
+.idea/
+*.swp
+
+# Build and dependency directories
+build/
+coverage/
+
+# Temporary files
+*.tmp
+*.bak
+*.pid
+*.seed
+*.pid.lock
