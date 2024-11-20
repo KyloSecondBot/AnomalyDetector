@@ -6,29 +6,26 @@ export default function Home() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
 
-    // Function to handle sending a message
     const sendMessage = async () => {
         if (!input.trim()) return;
-    
+
         const newMessages = [...messages, { role: 'user', content: input }];
         setMessages(newMessages);
         setInput('');
-    
+
         try {
             const response = await axios.post('http://localhost:3011/api/chat', { prompt: input });
             console.log('Backend Response:', response.data);
-    
+
             setMessages([...newMessages, { role: 'assistant', content: response.data.response }]);
         } catch (error) {
             console.error('Error sending message:', error);
             setMessages([...newMessages, { role: 'assistant', content: 'An error occurred. Please try again.' }]);
         }
     };
-    
-    
 
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter') sendMessage(); // Send message on Enter key press
+        if (e.key === 'Enter') sendMessage();
     };
 
     return (
