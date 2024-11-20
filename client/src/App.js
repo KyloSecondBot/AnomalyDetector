@@ -4,7 +4,6 @@ import Home from './pages/HomePage/Home';
 import SQLCheck from './pages/SQLCheckPage/Sql';
 import SQLLog from './pages/SQLAnalysisPage/Sqllog';
 
-
 function App() {
   return (
     <Router>
