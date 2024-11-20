@@ -96,7 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
     const [open, setOpen] = useState(false);
-    const [darkMode, setDarkMode] = useState(false); // State to toggle theme
+    const [darkMode, setDarkMode] = useState(true); // State to toggle theme
     const navigate = useNavigate();
 
     // Dynamic themes

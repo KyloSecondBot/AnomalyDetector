@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import CircularWithValueLabel from '../../components/CircularLoading';
 import './Home.css';
 
 export default function Home() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
+    const [loading, setLoading] = useState(false); // State to track loading
 
     const sendMessage = async () => {
         if (!input.trim()) return;
@@ -12,6 +14,7 @@ export default function Home() {
         const newMessages = [...messages, { role: 'user', content: input }];
         setMessages(newMessages);
         setInput('');
+        setLoading(true); // Start loading
 
         try {
             const response = await axios.post('http://localhost:3011/api/chat', { prompt: input });
@@ -21,6 +24,8 @@ export default function Home() {
         } catch (error) {
             console.error('Error sending message:', error);
             setMessages([...newMessages, { role: 'assistant', content: 'An error occurred. Please try again.' }]);
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
@@ -30,6 +35,11 @@ export default function Home() {
 
     return (
         <div className="chat-container">
+            {loading && (
+                <div className="loading-overlay">
+                    <CircularWithValueLabel />
+                </div>
+            )}
             <div className="chat-window">
                 {messages.map((message, index) => (
                     <div key={index} className={`message ${message.role}`}>
